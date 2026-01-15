@@ -35,7 +35,7 @@ fn main() -> io::Result<()> {
     let mut out = io::stdout();
 
     my_print_cells(&mut out, generation, HEIGHT, WIDTH, &cell);
-    sleep(Duration::from_secs(1));
+    sleep(Duration::from_millis(100));
     write!(out, "\x1b[{}A", HEIGHT + 3)?;
     out.flush()?;
 
@@ -43,7 +43,7 @@ fn main() -> io::Result<()> {
         generation += 1;
         my_update_cells(HEIGHT, WIDTH, &mut cell);
         my_print_cells(&mut out, generation, HEIGHT, WIDTH, &cell);
-        sleep(Duration::from_secs(1));
+        sleep(Duration::from_millis(100));
         write!(out, "\x1b[{}A", HEIGHT + 3)?;
         out.flush()?;
     }
@@ -100,7 +100,14 @@ fn my_init_cells(
 
     // default
     if fp.is_none() {
-        let points = [(20, 30), (20, 32), (22, 30), (22, 31), (23, 31)];
+        let points = [(20, 30), (20, 32), (22, 30), (22, 31), (23, 31), (23, 32), (24, 31), 
+                      (25, 33), (26, 34), (26, 35), (27, 33), (27, 34), (27, 35), (28, 36),
+                      (30, 35), (30, 36), (30, 37), (31, 35), (31, 36), (31, 37), (32, 34),
+                      (32, 38), (34, 33), (34, 34), (34, 35), (35, 33), (35, 34), (35, 35),
+                      (36, 32), (36, 36), (38, 31), (38, 32), (38, 33), (18,20), (16,12), (16,10),(16,18),(18,16), (19,14),
+                      (20,12), (21,14), (22,16), (22,18), (22,10), (24,10), (24,12), (24,14),
+                      (26,14), (26,16), (26,18), (28,16), (30,18), (30,16), (30,14), (31,12),
+                      (32,14), (34,12), (34,10), (34,16), (36,14), (38,12), (38,10)];
         for (y, x) in points {
             cell[y][x] = 1;
         }
